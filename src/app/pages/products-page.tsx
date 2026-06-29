@@ -1,7 +1,7 @@
 import { client } from "@/shared/api/client";
 import { useQuery } from "@tanstack/react-query";
 
-export function App() {
+export const ProductsPage = () => {
   const query = useQuery({
     queryKey: ["products"],
     queryFn: () => {
@@ -19,4 +19,4 @@ export function App() {
       ))}
     </ul>
   );
-}
+};
