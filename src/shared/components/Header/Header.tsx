@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "./ui/button";
-import { Switch } from "./ui/switch";
+import { Switch, Button } from "..";
 
 export const Header = () => {
   return (
