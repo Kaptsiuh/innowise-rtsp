@@ -1,9 +1,9 @@
-import { ProductsPagination } from "./ProductsPagination/ProductsPagination";
 import { ProductList } from "./ProductList/ProductList";
 import { useProducts } from "../hooks/useProducts";
+import { ItemsPagination } from "@/shared/components";
 
 export const Products = () => {
-  const { products, isLoading, isError, error, pagination } = useProducts();
+  const { items, isLoading, isError, error, pagination } = useProducts();
 
   if (isLoading) {
     return (
@@ -23,8 +23,8 @@ export const Products = () => {
 
   return (
     <>
-      <ProductList products={products} />
-      <ProductsPagination
+      <ProductList products={items} />
+      <ItemsPagination
         page={pagination.page}
         pages={pagination.pages}
         setPage={pagination.setPage}

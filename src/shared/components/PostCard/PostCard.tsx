@@ -6,9 +6,9 @@ type Props = {
 };
 
 const ICONS = {
-  like: "👍",
-  dislike: "👎",
-  view: "👁️",
+  like: "\u{1F44D}",
+  dislike: "\u{1F44E}",
+  view: "\u{1F441}",
 } as const;
 
 export const PostCard = ({ post }: Props) => {

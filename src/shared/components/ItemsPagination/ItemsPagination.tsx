@@ -13,7 +13,7 @@ type Props = {
   setPage: (page: number) => void;
 };
 
-export const ProductsPagination = ({
+export const ItemsPagination = ({
   page,
   pages,
   setPage,

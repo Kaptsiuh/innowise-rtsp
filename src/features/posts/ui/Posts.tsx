@@ -1,9 +1,9 @@
 import { PostList } from "./PostList/PostList";
 import { usePosts } from "../hooks/usePosts";
-import { PostsPagination } from "./PostsPagination/PostsPagination";
+import { ItemsPagination } from "@/shared/components";
 
 export const Posts = () => {
-  const { posts, isLoading, isError, error, pagination } = usePosts();
+  const { items, isLoading, isError, error, pagination } = usePosts();
 
   if (isLoading) {
     return (
@@ -23,8 +23,8 @@ export const Posts = () => {
 
   return (
     <>
-      <PostList posts={posts} />
-      <PostsPagination
+      <PostList posts={items} />
+      <ItemsPagination
         page={pagination.page}
         pages={pagination.pages}
         setPage={pagination.setPage}

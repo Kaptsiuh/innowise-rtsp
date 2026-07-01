@@ -10,7 +10,7 @@ export interface Post {
   userId: number;
 }
 
-export interface PostsResponse extends PaginatedResponse<Post> {
+export interface PostsResponse extends PaginatedResponse {
   posts: Post[];
 }
 
@@ -22,7 +22,7 @@ export interface Comment {
   user: Pick<User, "id" | "username" | "fullName">;
 }
 
-export interface CommentsResponse extends PaginatedResponse<Comment> {
+export interface CommentsResponse extends PaginatedResponse {
   comments: Comment[];
 }
 

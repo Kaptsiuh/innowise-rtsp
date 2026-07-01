@@ -46,6 +46,6 @@ interface Meta {
   qrCode: string;
 }
 
-export interface ProductsResponse extends PaginatedResponse<Product> {
+export interface ProductsResponse extends PaginatedResponse {
   products: Product[];
 }
