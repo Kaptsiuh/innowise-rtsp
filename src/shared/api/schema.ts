@@ -4,430 +4,933 @@
  */
 
 export interface paths {
-    "/products": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** get all products */
-        get: {
-            parameters: {
-                query?: {
-                    limit?: number;
-                    skip?: number;
-                    select?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Products"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/products": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/products/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** get all products */
+    get: {
+      parameters: {
+        query?: {
+          limit?: number;
+          skip?: number;
+          select?: string;
         };
-        /** search products */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description searchQuery */
-                    q?: string;
-                    limit?: number;
-                    skip?: number;
-                    select?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Products"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Products"];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
     };
-    "/products/categories": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** get all products categories */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": string[];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/products/search": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/products/{product_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** search products */
+    get: {
+      parameters: {
+        query?: {
+          /** @description searchQuery */
+          q?: string;
+          limit?: number;
+          skip?: number;
+          select?: string;
         };
-        /** get product by id */
-        get: {
-            parameters: {
-                query?: {
-                    select?: string;
-                };
-                header?: never;
-                path: {
-                    product_id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Product"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Products"];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
     };
-    "/products/category/{category_name}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** get products of category */
-        get: {
-            parameters: {
-                query: {
-                    /** @description categorName */
-                    category_name: string;
-                    select?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Products"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/products/categories": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/producs/add": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** get all products categories */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": string[];
+          };
         };
-        get?: never;
-        put?: never;
-        /** create a new product */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["Product"];
-                };
-            };
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Product"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/producs/{product_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /** update a product */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    product_id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["Product"];
-                };
-            };
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Product"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        post?: never;
-        /** delete a product */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    product_id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ProductDelete"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        options?: never;
-        head?: never;
-        /** update a product */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    product_id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["Product"];
-                };
-            };
-            responses: {
-                /** @description success */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Product"];
-                    };
-                };
-                /** @description error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/products/{product_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /** get product by id */
+    get: {
+      parameters: {
+        query?: {
+          select?: string;
+        };
+        header?: never;
+        path: {
+          product_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Product"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    /** update a product */
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          product_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Product"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    post?: never;
+    /** delete a product */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          product_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["ProductDelete"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    /** partially update a product */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          product_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Product"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    trace?: never;
+  };
+  "/products/category/{category_name}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get products of category */
+    get: {
+      parameters: {
+        query?: {
+          select?: string;
+        };
+        header?: never;
+        path: {
+          /** @description categoryName */
+          category_name: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Products"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/products/add": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** create a new product */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Product"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get all posts */
+    get: {
+      parameters: {
+        query?: {
+          limit?: number;
+          skip?: number;
+          select?: string;
+          sortBy?: string;
+          order?: "asc" | "desc";
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Posts"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts/search": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** search posts */
+    get: {
+      parameters: {
+        query?: {
+          /** @description search query */
+          q?: string;
+          limit?: number;
+          skip?: number;
+          select?: string;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Posts"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts/tag-list": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get all posts tag list */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": string[];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts/tag/{tag_name}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get posts by tag */
+    get: {
+      parameters: {
+        query?: {
+          limit?: number;
+          skip?: number;
+          select?: string;
+        };
+        header?: never;
+        path: {
+          /** @description tag name */
+          tag_name: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Posts"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts/user/{user_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get all posts by user id */
+    get: {
+      parameters: {
+        query?: {
+          limit?: number;
+          skip?: number;
+          select?: string;
+        };
+        header?: never;
+        path: {
+          /** @description user ID */
+          user_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Posts"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts/{post_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get post by id */
+    get: {
+      parameters: {
+        query?: {
+          select?: string;
+        };
+        header?: never;
+        path: {
+          post_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Post"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    /** update a post */
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          post_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Post"];
+        };
+      };
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Post"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    post?: never;
+    /** delete a post */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          post_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["PostDelete"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    /** partially update a post */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          post_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Post"];
+        };
+      };
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Post"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    trace?: never;
+  };
+  "/posts/{post_id}/comments": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** get post's comments */
+    get: {
+      parameters: {
+        query?: {
+          limit?: number;
+          skip?: number;
+          select?: string;
+        };
+        header?: never;
+        path: {
+          post_id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Comments"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/posts/add": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** create a new post */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Post"];
+        };
+      };
+      responses: {
+        /** @description success */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Post"];
+          };
+        };
+        /** @description error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        Products: {
-            products?: components["schemas"]["Product"][];
-            total?: number;
-            skip?: number;
-            limit?: number;
-        };
-        Product: {
-            id?: number;
-            title?: string;
-            description?: string;
-            price?: number;
-            discountPercentage?: number;
-            rating?: number;
-            stock?: number;
-            brand?: string;
-            category?: string;
-            thumbnail?: string;
-            images?: string[];
-        };
-        ProductDelete: components["schemas"]["Product"] & {
-            isDeleted?: boolean;
-            deletedOn?: string;
-        };
+  schemas: {
+    Products: {
+      products?: components["schemas"]["Product"][];
+      total?: number;
+      skip?: number;
+      limit?: number;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    Product: {
+      id?: number;
+      title?: string;
+      description?: string;
+      price?: number;
+      discountPercentage?: number;
+      rating?: number;
+      stock?: number;
+      brand?: string;
+      category?: string;
+      thumbnail?: string;
+      images?: string[];
+    };
+    ProductDelete: components["schemas"]["Product"] & {
+      isDeleted?: boolean;
+      deletedOn?: string;
+    };
+    Posts: {
+      posts?: components["schemas"]["Post"][];
+      total?: number;
+      skip?: number;
+      limit?: number;
+    };
+    Post: {
+      id?: number;
+      title?: string;
+      body?: string;
+      tags?: string[];
+      reactions?: {
+        likes?: number;
+        dislikes?: number;
+      };
+      views?: number;
+      userId?: number;
+    };
+    PostDelete: components["schemas"]["Post"] & {
+      isDeleted?: boolean;
+      deletedOn?: string;
+    };
+    Comments: {
+      comments?: components["schemas"]["Comment"][];
+      total?: number;
+      skip?: number;
+      limit?: number;
+    };
+    Comment: {
+      id?: number;
+      body?: string;
+      postId?: number;
+      likes?: number;
+      user?: {
+        id?: number;
+        username?: string;
+        fullName?: string;
+      };
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;

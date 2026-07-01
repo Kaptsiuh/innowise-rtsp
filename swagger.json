@@ -3,7 +3,7 @@
   "info": {
     "title": "DummyJSON API",
     "version": "0.0.5",
-    "description": "DummyJSON API"
+    "description": "DummyJSON API - Products and Posts endpoints"
   },
   "externalDocs": {
     "description": "swagger.json",
@@ -174,79 +174,7 @@
             "description": "error"
           }
         }
-      }
-    },
-    "/products/category/{category_name}": {
-      "get": {
-        "summary": "get products of category",
-        "tags": ["Product"],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "category_name",
-            "description": "categorName",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          },
-          {
-            "in": "query",
-            "name": "select",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Products"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "error"
-          }
-        }
-      }
-    },
-    "/producs/add": {
-      "post": {
-        "summary": "create a new product",
-        "tags": ["Product"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Product"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "error"
-          }
-        }
-      }
-    },
-    "/producs/{product_id}": {
+      },
       "put": {
         "summary": "update a product",
         "tags": ["Product"],
@@ -286,7 +214,7 @@
         }
       },
       "patch": {
-        "summary": "update a product",
+        "summary": "partially update a product",
         "tags": ["Product"],
         "parameters": [
           {
@@ -343,6 +271,561 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProductDelete"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/products/category/{category_name}": {
+      "get": {
+        "summary": "get products of category",
+        "tags": ["Product"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "category_name",
+            "description": "categoryName",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/products/add": {
+      "post": {
+        "summary": "create a new product",
+        "tags": ["Product"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "summary": "get all posts",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"]
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/search": {
+      "get": {
+        "summary": "search posts",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "search query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/tag-list": {
+      "get": {
+        "summary": "get all posts tag list",
+        "tags": ["Post"],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/tag/{tag_name}": {
+      "get": {
+        "summary": "get posts by tag",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_name",
+            "description": "tag name",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/user/{user_id}": {
+      "get": {
+        "summary": "get all posts by user id",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "user ID",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/{post_id}": {
+      "get": {
+        "summary": "get post by id",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "post_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      },
+      "put": {
+        "summary": "update a post",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "post_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "partially update a post",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "post_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete a post",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "post_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDelete"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/{post_id}/comments": {
+      "get": {
+        "summary": "get post's comments",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "post_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comments"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/posts/add": {
+      "post": {
+        "summary": "create a new post",
+        "tags": ["Post"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
                 }
               }
             }
@@ -434,6 +917,132 @@
             }
           }
         ]
+      },
+      "Posts": {
+        "type": "object",
+        "properties": {
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reactions": {
+            "type": "object",
+            "properties": {
+              "likes": {
+                "type": "number"
+              },
+              "dislikes": {
+                "type": "number"
+              }
+            }
+          },
+          "views": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          }
+        }
+      },
+      "PostDelete": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Post"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "isDeleted": {
+                "type": "boolean"
+              },
+              "deletedOn": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Comments": {
+        "type": "object",
+        "properties": {
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "body": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "likes": {
+            "type": "number"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "username": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -441,6 +1050,10 @@
     {
       "name": "Product",
       "description": "The product API"
+    },
+    {
+      "name": "Post",
+      "description": "The post API"
     }
   ]
 }

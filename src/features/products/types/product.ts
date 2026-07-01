@@ -1,3 +1,5 @@
+import type { PaginatedResponse } from "@/shared/types/common";
+
 export interface Product {
   id: number;
   title: string;
@@ -23,13 +25,13 @@ export interface Product {
   images: string[];
 }
 
-export interface Dimensions {
+interface Dimensions {
   width: number;
   height: number;
   depth: number;
 }
 
-export interface Review {
+interface Review {
   rating: number;
   comment: string;
   date: string;
@@ -37,16 +39,13 @@ export interface Review {
   reviewerEmail: string;
 }
 
-export interface Meta {
+interface Meta {
   createdAt: string;
   updatedAt: string;
   barcode: string;
   qrCode: string;
 }
 
-export interface ProductsResponse {
+export interface ProductsResponse extends PaginatedResponse<Product> {
   products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
 }
