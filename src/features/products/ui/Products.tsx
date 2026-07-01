@@ -5,8 +5,21 @@ import { useProducts } from "../hooks/useProducts";
 export const Products = () => {
   const { products, isLoading, isError, error, pagination } = useProducts();
 
-  if (isLoading) return <span>Loading...</span>;
-  if (isError) return <span>Error: {error?.message}</span>;
+  if (isLoading) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="text-red-500">Error: {error?.message}</div>
+      </div>
+    );
+  }
 
   return (
     <>

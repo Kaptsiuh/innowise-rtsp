@@ -4,7 +4,7 @@ import {
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-} from "../../../../shared/components";
+} from "@/shared/components";
 
 type Props = {
   page: number;

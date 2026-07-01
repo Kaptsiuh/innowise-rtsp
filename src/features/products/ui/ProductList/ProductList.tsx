@@ -1,4 +1,5 @@
-import type { Product } from "../types/product";
+import { ProductCard } from "@/shared/components/ProductCard/ProductCard";
+import type { Product } from "../../types/product";
 
 type Props = {
   products: Product[];
@@ -6,17 +7,17 @@ type Props = {
 
 export const ProductList = ({ products }: Props) => {
   if (!products?.length) {
-    return <div>No products found</div>;
+    return (
+      <div className="flex h-64 items-center justify-center text-gray-500">
+        No products found
+      </div>
+    );
   }
 
   return (
-    <ul>
+    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {products.map((p) => (
-        <li key={p.id}>
-          <div>{p.brand}</div>
-          <div>{p.description}</div>
-          <div>{p.price}</div>
-        </li>
+        <ProductCard key={p.id} product={p} />
       ))}
     </ul>
   );
