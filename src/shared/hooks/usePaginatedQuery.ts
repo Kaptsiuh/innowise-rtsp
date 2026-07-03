@@ -1,12 +1,12 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 
-interface UsePaginatedQueryOptions<TData, TItem> {
+interface UsePaginatedQueryOptions<T, I> {
   queryKey: readonly string[];
-  queryFn: (page: number, signal?: AbortSignal) => Promise<TData>;
+  queryFn: (page: number, signal?: AbortSignal) => Promise<T>;
   itemsPerPage?: number;
   initialPage?: number;
-  selectItems: (data: TData) => TItem[];
+  selectItems: (data: T) => I[];
 }
 
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -35,18 +35,20 @@ function generatePages(
   return pages;
 }
 
-export function usePaginatedQuery<TData extends { total: number }, TItem>({
+export function usePaginatedQuery<T extends { total: number }, I>({
   queryKey,
   queryFn,
   itemsPerPage = DEFAULT_ITEMS_PER_PAGE,
   initialPage = 1,
   selectItems,
-}: UsePaginatedQueryOptions<TData, TItem>) {
+}: UsePaginatedQueryOptions<T, I>) {
   const [page, setPage] = useState(initialPage);
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: [...queryKey, page],
-    queryFn: ({ signal }) => queryFn(page, signal),
+    queryFn: ({ signal }) => {
+      return queryFn(page, signal);
+    },
     placeholderData: keepPreviousData,
   });
 

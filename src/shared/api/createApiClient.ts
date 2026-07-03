@@ -34,5 +34,16 @@ export const createApiClient = <T>({
         throw new Error(`API Error (${endpoint}):`, error);
       }
     },
+
+    // getItem: async (id: string, signal?: AbortSignal): Promise<T> => {
+    //   try {
+    //     const response = await client.GET(`${endpoint}/${id}`, {
+    //       signal,
+    //     });
+    //     return response.data as T;
+    //   } catch (error) {
+    //     throw new Error(`API Error (${endpoint}/${id}):`, error);
+    //   }
+    // },
   };
 };
