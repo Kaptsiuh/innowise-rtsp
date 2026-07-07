@@ -1,8 +1,13 @@
-import type { Post } from "@/features/posts/types/post";
 import { Button } from "../ui/button";
+import { Link } from "@tanstack/react-router";
+import { Route as PostRoute } from "@/app/routes/posts.$postId";
+import { cn } from "@/shared/lib/utils";
+import type { components } from "@/shared/api/schema";
+type Post = components["schemas"]["Post"];
 
 type Props = {
   post: Post;
+  variant?: "card" | "detail";
 };
 
 const ICONS = {
@@ -11,14 +16,32 @@ const ICONS = {
   view: "\u{1F441}",
 } as const;
 
-export const PostCard = ({ post }: Props) => {
+export const PostCard = ({ post, variant = "card" }: Props) => {
+  const isDetail = variant === "detail";
+
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-lg">
+    <div
+      className={
+        "group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-lg"
+      }
+    >
       <div className="flex flex-1 flex-col p-4 ">
-        <h3 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900">
+        <h3
+          className={cn(
+            "mb-2 line-clamp-2 text-base font-semibold text-gray-900",
+            isDetail ? "text-3xl" : "line-clamp-2 text-base",
+          )}
+        >
           {post.title}
         </h3>
-        <p className="line-clamp-3 mb-2  text-sm text-gray-600">{post.body}</p>
+        <p
+          className={cn(
+            "mb-2  text-gray-600",
+            isDetail ? "text-base leading-relaxed" : "line-clamp-3 text-sm",
+          )}
+        >
+          {post.body}
+        </p>
         <div className="flex flex-wrap gap-1 pb-4 ">
           {post.tags.slice(0, 3).map((tag) => (
             <span
@@ -50,9 +73,13 @@ export const PostCard = ({ post }: Props) => {
             <span>{post.views}</span>
           </div>
         </div>
-        <Button variant="outline" className="mt-3 w-full cursor-pointer ">
-          Read more
-        </Button>
+        {!isDetail && (
+          <Link to={PostRoute.to} params={{ postId: String(post.id) }}>
+            <Button variant="outline" className="mt-3 w-full cursor-pointer ">
+              Read more
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

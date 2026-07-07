@@ -1,8 +1,7 @@
-import { PostsPage } from "@/pages/posts-page";
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/posts")({
-  component: PostsPage,
+  component: () => <Outlet />,
   beforeLoad: () => {
     const token = localStorage.getItem("auth_token");
     if (!token) {

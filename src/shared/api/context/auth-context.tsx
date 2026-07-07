@@ -4,6 +4,7 @@ import {
   useState,
   useEffect,
   useCallback,
+  type ReactNode,
 } from "react";
 import type { User } from "@/features/auth/types/auth";
 import { authApi } from "@/features/auth/api/authApi";
@@ -19,9 +20,13 @@ interface AuthContextType {
   isAuthenticated: boolean;
 }
 
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(() =>
     localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
   );
