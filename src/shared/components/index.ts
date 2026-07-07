@@ -1,3 +1,8 @@
+export { Separator } from "./ui/separator";
+export * from "./ui/card";
+export * from "./ui/field";
+export { Input } from "./ui/input";
+export { Label } from "./ui/label";
 export * from "./ui/pagination";
 export { Switch } from "./ui/switch";
 export { Button } from "./ui/button";

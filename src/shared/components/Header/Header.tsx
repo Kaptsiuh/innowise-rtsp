@@ -2,10 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { Switch, Button } from "..";
 import { useAuth } from "@/shared/api/context/auth-context";
 import { useNavigate } from "@tanstack/react-router";
+import { useTheme } from "@/shared/hooks/useTheme";
 
 export const Header = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -30,7 +32,7 @@ export const Header = () => {
           </Link>
         </nav>
         <div className="flex items-center gap-3">
-          <Switch />
+          <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
               <span className="text-sm text-gray-700">
