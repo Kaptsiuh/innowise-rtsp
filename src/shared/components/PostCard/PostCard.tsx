@@ -1,9 +1,8 @@
 import { Button } from "../ui/button";
 import { Link } from "@tanstack/react-router";
-import { Route as PostRoute } from "@/app/routes/posts.$postId";
+import { Route } from "@/app/routes/posts.$postId";
 import { cn } from "@/shared/lib/utils";
-import type { components } from "@/shared/api/schema";
-type Post = components["schemas"]["Post"];
+import type { Post } from "@/features/posts/types/post";
 
 type Props = {
   post: Post;
@@ -74,7 +73,7 @@ export const PostCard = ({ post, variant = "card" }: Props) => {
           </div>
         </div>
         {!isDetail && (
-          <Link to={PostRoute.to} params={{ postId: String(post.id) }}>
+          <Link to={Route.to} params={{ postId: String(post.id) }}>
             <Button variant="outline" className="mt-3 w-full cursor-pointer ">
               Read more
             </Button>

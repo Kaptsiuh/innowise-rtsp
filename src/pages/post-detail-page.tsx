@@ -37,7 +37,7 @@ export const PostDetailPage = () => {
     <div className="container mx-auto px-4 py-8 max-w-3xl">
       <Link
         to="/posts"
-        className="inline-flex items-center text-sm text-blue-600 hover:underline mb-6"
+        className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
       >
         Back to posts
       </Link>

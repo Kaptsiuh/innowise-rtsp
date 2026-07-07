@@ -31,7 +31,7 @@ interface Dimensions {
   depth: number;
 }
 
-interface Review {
+export interface Review {
   rating: number;
   comment: string;
   date: string;

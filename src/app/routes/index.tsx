@@ -4,9 +4,6 @@ import { ProductsPage } from "../../pages/products-page";
 export const Route = createFileRoute("/")({
   component: ProductsPage,
   beforeLoad: () => {
-    const token = localStorage.getItem("auth_token");
-    if (!token) {
-      throw redirect({ to: "/login" });
-    }
+    throw redirect({ to: "/products" });
   },
 });
