@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './__root'
 import { Route as ProductsRouteImport } from './products'
 import { Route as PostsRouteImport } from './posts'
 import { Route as LoginRouteImport } from './login'
+import { Route as ChatRouteImport } from './chat'
 import { Route as IndexRouteImport } from './index'
 import { Route as ProductsIndexRouteImport } from './products.index'
 import { Route as PostsIndexRouteImport } from './posts.index'
@@ -31,6 +32,11 @@ const PostsRoute = PostsRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -61,6 +67,7 @@ const PostsPostIdRoute = PostsPostIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
   '/posts': typeof PostsRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/products/$productId': typeof ProductsProductIdRoute
@@ -80,6 +88,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
   '/posts': typeof PostsRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/chat'
     | '/login'
     | '/posts'
     | '/products'
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/chat'
     | '/login'
     | '/posts/$postId'
     | '/products/$productId'
@@ -110,6 +121,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/chat'
     | '/login'
     | '/posts'
     | '/products'
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChatRoute: typeof ChatRoute
   LoginRoute: typeof LoginRoute
   PostsRoute: typeof PostsRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
@@ -147,6 +160,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -215,6 +235,7 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChatRoute: ChatRoute,
   LoginRoute: LoginRoute,
   PostsRoute: PostsRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,

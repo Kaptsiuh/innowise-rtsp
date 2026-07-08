@@ -30,6 +30,12 @@ export const Header = () => {
           >
             Posts
           </Link>
+          <Link
+            to="/chat/"
+            className="text-sm font-medium hover:text-muted-foreground transition-colors"
+          >
+            Chat
+          </Link>
         </nav>
         <div className="flex items-center gap-3">
           <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
