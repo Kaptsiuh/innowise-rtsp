@@ -1,4 +1,5 @@
 import type { components } from "@/shared/api/schema";
+import { Card, CardHeader } from "@/shared/components";
 type Comment = components["schemas"]["Comment"];
 
 type Props = {
@@ -19,31 +20,27 @@ export const PostComments = ({ comments }: Props) => {
       <h2 className="text-2xl font-semibold mb-4">
         Comments ({comments.length})
       </h2>
-      {comments.length === 0 ? (
-        <p className="text-gray-500">No comments yet.</p>
-      ) : (
-        <ul className="space-y-4">
-          {comments.map((comment) => (
-            <li key={comment.id} className="bg-gray-50 p-4 rounded-lg border">
-              <div className="flex items-start gap-3">
-                <div className="flex-1">
-                  <p className="font-medium text-gray-800">
-                    {comment.user?.fullName ||
-                      comment.user?.username ||
-                      "Anonymous"}
-                  </p>
-                  <p className="text-gray-600 mt-1">{comment.body}</p>
-                  <div className="flex items-center gap-2 mt-2 text-sm text-gray-400">
-                    <span>
-                      {ICONS.like} {comment.likes || 0}
-                    </span>
-                  </div>
+      <ul className="space-y-4">
+        {comments.map((comment) => (
+          <li key={comment.id}>
+            <Card>
+              <CardHeader className="flex-1">
+                <p className="font-medium">
+                  {comment.user?.fullName ||
+                    comment.user?.username ||
+                    "Anonymous"}
+                </p>
+                <p className="text-muted-foreground">{comment.body}</p>
+                <div className="flex items-center gap-2">
+                  <span>
+                    {ICONS.like} {comment.likes || 0}
+                  </span>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+              </CardHeader>
+            </Card>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

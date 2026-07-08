@@ -1,3 +1,4 @@
+export { Badge } from "./ui/badge";
 export { Separator } from "./ui/separator";
 export * from "./ui/card";
 export * from "./ui/field";

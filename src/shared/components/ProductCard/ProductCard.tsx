@@ -3,6 +3,14 @@ import { Button } from "../ui/button";
 import { Route } from "@/app/routes/products.$productId";
 import { cn } from "@/shared/lib/utils";
 import type { Product } from "@/features/products/types/product";
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../";
 
 type Props = {
   product: Product;
@@ -17,7 +25,7 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
 
   const renderContent = () => (
     <>
-      <div className="relative aspect-square overflow-hidden bg-gray-100">
+      <div className="relative aspect-square overflow-hidden bg-muted">
         <img
           src={product.thumbnail}
           alt={product.title}
@@ -25,31 +33,33 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
           loading="lazy"
         />
         {discount && (
-          <span className="absolute left-2 top-2 rounded bg-red-600 px-2 py-1 text-xs font-semibold text-white">
+          <Badge className="absolute left-2 top-2 bg-red-600 hover:bg-red-700 text-white">
             -{Math.round(product.discountPercentage)}%
-          </span>
+          </Badge>
         )}
         {product.stock <= 5 && product.stock > 0 && (
-          <span className="absolute bottom-2 left-2 rounded bg-yellow-500 px-2 py-1 text-xs font-semibold text-white">
+          <Badge className="absolute bottom-2 left-2 bg-yellow-500 hover:bg-yellow-600 text-white">
             Last chance!
-          </span>
+          </Badge>
         )}
         {product.stock === 0 && (
-          <span className="absolute bottom-2 left-2 rounded bg-gray-600 px-2 py-1 text-xs font-semibold text-white">
+          <Badge className="absolute bottom-2 left-2 bg-gray-600 hover:bg-gray-700 text-white">
             Out of stock
-          </span>
+          </Badge>
         )}
       </div>
-      <div className="flex flex-1 flex-col p-4">
-        <div className="mb-1 text-xs text-gray-500">{product.brand}</div>
-        <h3
+      <CardHeader>
+        <div className="pt-2 text-xs text-muted-foreground">
+          {product.brand}
+        </div>
+        <CardTitle
           className={cn(
-            "font-semibold text-gray-900",
-            isDetail ? "text-2xl mb-2" : "text-sm mb-2 line-clamp-2",
+            "font-semibold",
+            isDetail ? "text-2xl" : "text-base line-clamp-2",
           )}
         >
           {product.title}
-        </h3>
+        </CardTitle>
         <div className="mb-2 flex items-center gap-1 text-sm">
           <span
             className={
@@ -70,22 +80,22 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
               <span className="text-xl font-bold text-red-600">
                 ${discountedPrice.toFixed(2)}
               </span>
-              <span className="text-sm text-gray-400 line-through">
+              <span className="text-sm text-muted-foreground line-through">
                 ${product.price.toFixed(2)}
               </span>
             </div>
           ) : (
-            <span className="text-xl font-bold text-gray-900">
+            <span className="text-xl font-bold text-foreground">
               ${product.price.toFixed(2)}
             </span>
           )}
         </div>
-      </div>
-      <div className="flex flex-1 flex-col p-4">
+      </CardHeader>
+      <CardContent className="flex-1">
         {isDetail && (
-          <div className="space-y-4 text-gray-700">
+          <div className="space-y-4 text-foreground">
             <p className="text-base">{product.description}</p>
-            <div className="grid gap-2">
+            <div className="grid gap-2 text-sm">
               <div>
                 <span className="font-medium">Category:</span>{" "}
                 {product.category}
@@ -110,12 +120,12 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
             </div>
           </div>
         )}
-      </div>
+      </CardContent>
     </>
   );
 
   const renderAddToCartButton = () => (
-    <div className="p-4 pt-0">
+    <CardFooter className="pt-3">
       <Button
         className="w-full"
         disabled={product.stock === 0}
@@ -125,20 +135,19 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
       >
         {product.stock === 0 ? "Out of stock" : "Add to cart"}
       </Button>
-    </div>
+    </CardFooter>
   );
 
-  const wrapper =
-    "group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-lg";
+  const wrapper = "group h-full overflow-hidden";
 
   return isDetail ? (
-    <div className={wrapper}>
+    <Card className={wrapper}>
       {renderContent()}
       {renderAddToCartButton()}
-    </div>
+    </Card>
   ) : (
     <li className="list-none">
-      <div className={wrapper}>
+      <Card className={wrapper}>
         <Link
           to={Route.to}
           params={{ productId: String(product.id) }}
@@ -147,7 +156,7 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
           {renderContent()}
         </Link>
         {renderAddToCartButton()}
-      </div>
+      </Card>
     </li>
   );
 };
