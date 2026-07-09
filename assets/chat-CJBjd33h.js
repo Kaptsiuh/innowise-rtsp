@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/chat-page-D_vw1rbB.js","assets/utils-BOVj3o29.js","assets/index-CYC3QviP.js","assets/index-CNv940rD.css"])))=>i.map(i=>d[i]);
+import{a as e,y as t}from"./index-CYC3QviP.js";var n=t(()=>e(()=>import(`./chat-page-D_vw1rbB.js`),__vite__mapDeps([0,1,2,3])),`ChatPage`);export{n as component};
