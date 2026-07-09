@@ -14,9 +14,9 @@ export default defineConfig({
       generatedRouteTree: "./src/app/routes/routeTree.gen.ts",
       autoCodeSplitting: true,
     }),
+    babel({ presets: [reactCompilerPreset()] }),
     react(),
     tailwindcss(),
-    babel({ presets: [reactCompilerPreset()] }),
   ],
   base: "/innowise-rtsp/",
   resolve: {
