@@ -5,6 +5,7 @@ import { cn } from "@/shared/lib/utils";
 import type { Post } from "@/features/posts/types/post";
 import { CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { memo } from "react";
 
 type Props = {
   post: Post;
@@ -17,7 +18,7 @@ const ICONS = {
   view: "\u{1F441}",
 } as const;
 
-export const PostCard = ({ post, variant = "card" }: Props) => {
+export const PostCard = memo(({ post, variant = "card" }: Props) => {
   const isDetail = variant === "detail";
 
   return (
@@ -65,4 +66,4 @@ export const PostCard = ({ post, variant = "card" }: Props) => {
       )}
     </div>
   );
-};
+});

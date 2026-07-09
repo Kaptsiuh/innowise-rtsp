@@ -4,13 +4,14 @@ import { Route } from "@/app/routes/_authenticated/products.$productId";
 import { cn } from "@/shared/lib/utils";
 import type { Product } from "@/features/products/types/product";
 import { Badge, Card, CardContent, CardFooter, CardHeader, CardTitle } from "../";
+import { memo } from "react";
 
 type Props = {
   product: Product;
   variant?: "card" | "detail";
 };
 
-export const ProductCard = ({ product, variant = "card" }: Props) => {
+export const ProductCard = memo(({ product, variant = "card" }: Props) => {
   const isDetail = variant === "detail";
   const discount = Math.floor(product.discountPercentage) > 0;
   const discountedPrice = product.price * (1 - product.discountPercentage / 100);
@@ -23,6 +24,7 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
           alt={product.title}
           className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
+          decoding="async"
         />
         {discount && (
           <Badge className="absolute left-2 top-2 bg-red-600 hover:bg-red-700 text-white">
@@ -122,4 +124,4 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
       </Card>
     </li>
   );
-};
+});

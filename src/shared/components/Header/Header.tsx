@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Switch, Button } from "..";
 import { useAuth } from "@/shared/api/context/auth-context";
 import { useNavigate } from "@tanstack/react-router";
@@ -18,22 +18,13 @@ export const Header = () => {
     <header className="sticky top-0 w-full border-b bg-background/70 backdrop-blur  z-50">
       <div className="container flex justify-between  items-center align-center mx-auto px-4 py-8 h-16 ">
         <nav className="flex items-center gap-6">
-          <Link
-            to="/"
-            className="text-sm font-medium hover:text-muted-foreground transition-colors"
-          >
+          <Link to="/" className="text-sm font-medium hover:text-muted-foreground transition-colors">
             Products
           </Link>
-          <Link
-            to="/posts/"
-            className="text-sm font-medium hover:text-muted-foreground transition-colors"
-          >
+          <Link to="/posts/" className="text-sm font-medium hover:text-muted-foreground transition-colors">
             Posts
           </Link>
-          <Link
-            to="/chat/"
-            className="text-sm font-medium hover:text-muted-foreground transition-colors"
-          >
+          <Link to="/chat/" className="text-sm font-medium hover:text-muted-foreground transition-colors">
             Chat
           </Link>
         </nav>

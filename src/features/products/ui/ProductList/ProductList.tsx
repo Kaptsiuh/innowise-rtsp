@@ -1,17 +1,14 @@
 import { ProductCard } from "@/shared/components/ProductCard/ProductCard";
 import type { Product } from "../../types/product";
+import { memo } from "react";
 
 type Props = {
   products: Product[];
 };
 
-export const ProductList = ({ products }: Props) => {
+export const ProductList = memo(({ products }: Props) => {
   if (!products?.length) {
-    return (
-      <div className="flex h-64 items-center justify-center text-gray-500">
-        No products found
-      </div>
-    );
+    return <div className="flex h-64 items-center justify-center text-gray-500">No products found</div>;
   }
 
   return (
@@ -21,4 +18,4 @@ export const ProductList = ({ products }: Props) => {
       ))}
     </ul>
   );
-};
+});

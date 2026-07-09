@@ -12,10 +12,7 @@ interface UsePaginatedQueryOptions<T, I> {
 const DEFAULT_ITEMS_PER_PAGE = 10;
 const PAGINATION_RANGE = 1;
 
-function generatePages(
-  currentPage: number,
-  totalPages: number,
-): (number | "...")[] {
+function generatePages(currentPage: number, totalPages: number): (number | "...")[] {
   if (totalPages <= 1) return [1];
 
   const pages: (number | "...")[] = [];
@@ -53,13 +50,11 @@ export function usePaginatedQuery<T extends { total: number }, I>({
   });
 
   const totalPages = Math.ceil((data?.total || 0) / itemsPerPage);
-  const pages = useMemo(
-    () => generatePages(page, totalPages),
-    [page, totalPages],
-  );
+  const pages = useMemo(() => generatePages(page, totalPages), [page, totalPages]);
+  const items = useMemo(() => (data ? selectItems(data) : []), [data, selectItems]);
 
   return {
-    items: data ? selectItems(data) : [],
+    items,
     data,
     isLoading: isPending,
     isError,

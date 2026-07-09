@@ -1,10 +1,5 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-} from "@/shared/components";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink } from "@/shared/components";
+import { memo, useCallback } from "react";
 
 type Props = {
   page: number;
@@ -13,12 +8,7 @@ type Props = {
   setPage: (page: number) => void;
 };
 
-export const ItemsPagination = ({
-  page,
-  pages,
-  setPage,
-  totalPages,
-}: Props) => {
+export const ItemsPagination = memo(({ page, pages, setPage, totalPages }: Props) => {
   if (totalPages <= 1) return null;
 
   return (
@@ -29,17 +19,25 @@ export const ItemsPagination = ({
             {item === "..." ? (
               <PaginationEllipsis />
             ) : (
-              <PaginationLink
-                isActive={page === item}
-                onClick={() => setPage(item)}
-                className="cursor-pointer"
-              >
-                {item}
-              </PaginationLink>
+              <PageLink pageNum={item} isActive={page === item} setPage={setPage} />
             )}
           </PaginationItem>
         ))}
       </PaginationContent>
     </Pagination>
   );
-};
+});
+
+const PageLink = memo(
+  ({ pageNum, isActive, setPage }: { pageNum: number; isActive: boolean; setPage: (page: number) => void }) => {
+    const handleClick = useCallback(() => {
+      setPage(pageNum);
+    }, [pageNum, setPage]);
+
+    return (
+      <PaginationLink isActive={isActive} onClick={handleClick} className="cursor-pointer">
+        {pageNum}
+      </PaginationLink>
+    );
+  },
+);

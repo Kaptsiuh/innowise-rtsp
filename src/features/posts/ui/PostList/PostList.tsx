@@ -1,17 +1,14 @@
 import { PostCard } from "@/shared/components/PostCard/PostCard";
 import type { Post } from "../../types/post";
+import { memo } from "react";
 
 type Props = {
   posts: Post[];
 };
 
-export const PostList = ({ posts }: Props) => {
+export const PostList = memo(({ posts }: Props) => {
   if (!posts?.length) {
-    return (
-      <div className="flex h-64 items-center justify-center text-gray-500">
-        No posts found
-      </div>
-    );
+    return <div className="flex h-64 items-center justify-center text-gray-500">No posts found</div>;
   }
 
   return (
@@ -21,4 +18,4 @@ export const PostList = ({ posts }: Props) => {
       ))}
     </ul>
   );
-};
+});

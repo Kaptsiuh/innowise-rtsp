@@ -7,7 +7,6 @@ import { routeTree } from "../routes/routeTree.gen.ts";
 import { AuthProvider } from "@/shared/api/context/auth-context.tsx";
 import { queryClient } from "@/shared/lib/query-client.ts";
 
-// @ts-expect-error - TanStack Router
 const router = createRouter({ routeTree });
 
 declare module "@tanstack/react-router" {
