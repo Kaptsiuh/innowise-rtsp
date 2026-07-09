@@ -2,7 +2,7 @@ import createClient from "openapi-fetch";
 import type { paths } from "./schema";
 
 type QueuedRequest = {
-  resolve: (value: unknown) => void;
+  resolve: (value: Promise<Response>) => void;
   reject: (reason?: unknown) => void;
   request: Request;
 };
@@ -16,10 +16,8 @@ export const STORAGE_KEYS = {
 export const tokenStorage = {
   getAccess: () => localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
   getRefresh: () => localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN),
-  setAccess: (token: string) =>
-    localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, token),
-  setRefresh: (token: string) =>
-    localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, token),
+  setAccess: (token: string) => localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, token),
+  setRefresh: (token: string) => localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, token),
   clear: () => {
     localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
@@ -92,6 +90,9 @@ async function refreshTokens(): Promise<{
       throw new Error("Refresh failed");
     }
     const { accessToken, refreshToken: newRefreshToken } = data;
+    if (!accessToken) {
+      throw new Error("No access token in refresh response");
+    }
     tokenStorage.setAccess(accessToken);
     if (newRefreshToken) {
       tokenStorage.setRefresh(newRefreshToken);
@@ -105,10 +106,7 @@ async function refreshTokens(): Promise<{
   }
 }
 
-async function retryRequest(
-  request: Request,
-  token: string,
-): Promise<Response> {
+async function retryRequest(request: Request, token: string): Promise<Response> {
   const newRequest = new Request(request.url, {
     method: request.method,
     headers: new Headers(request.headers),

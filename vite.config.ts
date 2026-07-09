@@ -18,6 +18,7 @@ export default defineConfig({
     tailwindcss(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
+  base: "/innowise-rtsp/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { Switch, Button } from "..";
 import { useAuth } from "@/shared/api/context/auth-context";
 import { useNavigate } from "@tanstack/react-router";
@@ -21,10 +21,10 @@ export const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-muted-foreground transition-colors">
             Products
           </Link>
-          <Link to="/posts/" className="text-sm font-medium hover:text-muted-foreground transition-colors">
+          <Link to="/posts" className="text-sm font-medium hover:text-muted-foreground transition-colors">
             Posts
           </Link>
-          <Link to="/chat/" className="text-sm font-medium hover:text-muted-foreground transition-colors">
+          <Link to="/chat" className="text-sm font-medium hover:text-muted-foreground transition-colors">
             Chat
           </Link>
         </nav>

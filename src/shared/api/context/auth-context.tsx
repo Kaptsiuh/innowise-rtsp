@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 import type { User } from "@/features/auth/types/auth";
 import { authApi } from "@/features/auth/api/authApi";
 import { STORAGE_KEYS, tokenStorage } from "../client";
@@ -27,9 +20,7 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [token, setToken] = useState<string | null>(() =>
-    localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
-  );
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN));
   const [refreshToken, setRefreshToken] = useState<string | null>(() =>
     localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN),
   );
@@ -64,11 +55,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoading(true);
     try {
       const response = await authApi.login({ username, password });
-      const {
-        accessToken,
-        refreshToken: newRefreshToken,
-        ...userData
-      } = response;
+      const { accessToken, refreshToken: newRefreshToken, ...userData } = response;
       tokenStorage.setAccess(accessToken);
       if (newRefreshToken) {
         tokenStorage.setRefresh(newRefreshToken);
@@ -77,8 +64,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setToken(accessToken);
       setRefreshToken(newRefreshToken || null);
       setUser(userData);
-    } catch (error) {
-      throw new Error(`Login error :`, error);
+    } catch {
+      throw new Error(`Login error`);
     } finally {
       setIsLoading(false);
     }

@@ -27,8 +27,8 @@ export const createApiClient = <T>({ endpoint, itemsPerPage = 10 }: ApiClientOpt
         });
 
         return response.data as T;
-      } catch (error) {
-        throw new Error(`API Error (${endpoint}):`, error);
+      } catch {
+        throw new Error(`API Error (${endpoint})`);
       }
     },
   };

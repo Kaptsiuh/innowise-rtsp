@@ -3,12 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://Kaptsiuh.github.io/innowise-rtsp",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api:gen": "pnpm openapi-typescript ./swagger.json -o ./src/shared/api/schema.ts --toot-types"
+    "api:gen": "pnpm openapi-typescript ./swagger.json -o ./src/shared/api/schema.ts --toot-types",
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -18,6 +21,7 @@
     "@tanstack/react-router": "^1.170.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "gh-pages": "^6.3.0",
     "lucide-react": "^1.21.0",
     "openapi-fetch": "^0.17.0",
     "radix-ui": "^1.6.0",
