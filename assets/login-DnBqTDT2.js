@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/login-page-WzURCu8W.js","assets/utils-BOVj3o29.js","assets/index-BH0Gtnlz.js","assets/index-CJua1BGq.css"])))=>i.map(i=>d[i]);
-import{a as e,y as t}from"./index-BH0Gtnlz.js";var n=t(()=>e(()=>import(`./login-page-WzURCu8W.js`),__vite__mapDeps([0,1,2,3])),`LoginPage`);export{n as component};

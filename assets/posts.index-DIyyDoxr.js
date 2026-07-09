@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/posts-page-EsmjXR4F.js","assets/utils-BOVj3o29.js","assets/index-BH0Gtnlz.js","assets/index-CJua1BGq.css","assets/createApiClient-KTEw0eE1.js","assets/useQuery-Dy4BKwZO.js"])))=>i.map(i=>d[i]);
-import{a as e,y as t}from"./index-BH0Gtnlz.js";var n=t(()=>e(()=>import(`./posts-page-EsmjXR4F.js`),__vite__mapDeps([0,1,2,3,4,5])),`PostsPage`);export{n as component};
