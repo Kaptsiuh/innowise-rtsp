@@ -9,34 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './__root'
-import { Route as ProductsRouteImport } from './products'
-import { Route as PostsRouteImport } from './posts'
 import { Route as LoginRouteImport } from './login'
-import { Route as ChatRouteImport } from './chat'
+import { Route as AuthenticatedRouteImport } from './_authenticated'
 import { Route as IndexRouteImport } from './index'
-import { Route as ProductsIndexRouteImport } from './products.index'
-import { Route as PostsIndexRouteImport } from './posts.index'
-import { Route as ProductsProductIdRouteImport } from './products.$productId'
-import { Route as PostsPostIdRouteImport } from './posts.$postId'
+import { Route as AuthenticatedProductsRouteImport } from './_authenticated/products'
+import { Route as AuthenticatedPostsRouteImport } from './_authenticated/posts'
+import { Route as AuthenticatedChatRouteImport } from './_authenticated/chat'
+import { Route as AuthenticatedProductsIndexRouteImport } from './_authenticated/products.index'
+import { Route as AuthenticatedPostsIndexRouteImport } from './_authenticated/posts.index'
+import { Route as AuthenticatedProductsProductIdRouteImport } from './_authenticated/products.$productId'
+import { Route as AuthenticatedPostsPostIdRouteImport } from './_authenticated/posts.$postId'
 
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PostsRoute = PostsRouteImport.update({
-  id: '/posts',
-  path: '/posts',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChatRoute = ChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -44,65 +34,84 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsIndexRoute = ProductsIndexRouteImport.update({
+const AuthenticatedProductsRoute = AuthenticatedProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPostsRoute = AuthenticatedPostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedProductsIndexRoute =
+  AuthenticatedProductsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedProductsRoute,
+  } as any)
+const AuthenticatedPostsIndexRoute = AuthenticatedPostsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ProductsRoute,
+  getParentRoute: () => AuthenticatedPostsRoute,
 } as any)
-const PostsIndexRoute = PostsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PostsRoute,
-} as any)
-const ProductsProductIdRoute = ProductsProductIdRouteImport.update({
-  id: '/$productId',
-  path: '/$productId',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const PostsPostIdRoute = PostsPostIdRouteImport.update({
-  id: '/$postId',
-  path: '/$postId',
-  getParentRoute: () => PostsRoute,
-} as any)
+const AuthenticatedProductsProductIdRoute =
+  AuthenticatedProductsProductIdRouteImport.update({
+    id: '/$productId',
+    path: '/$productId',
+    getParentRoute: () => AuthenticatedProductsRoute,
+  } as any)
+const AuthenticatedPostsPostIdRoute =
+  AuthenticatedPostsPostIdRouteImport.update({
+    id: '/$postId',
+    path: '/$postId',
+    getParentRoute: () => AuthenticatedPostsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
-  '/posts': typeof PostsRouteWithChildren
-  '/products': typeof ProductsRouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/products/$productId': typeof ProductsProductIdRoute
-  '/posts/': typeof PostsIndexRoute
-  '/products/': typeof ProductsIndexRoute
+  '/chat': typeof AuthenticatedChatRoute
+  '/posts': typeof AuthenticatedPostsRouteWithChildren
+  '/products': typeof AuthenticatedProductsRouteWithChildren
+  '/posts/$postId': typeof AuthenticatedPostsPostIdRoute
+  '/products/$productId': typeof AuthenticatedProductsProductIdRoute
+  '/posts/': typeof AuthenticatedPostsIndexRoute
+  '/products/': typeof AuthenticatedProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/products/$productId': typeof ProductsProductIdRoute
-  '/posts': typeof PostsIndexRoute
-  '/products': typeof ProductsIndexRoute
+  '/chat': typeof AuthenticatedChatRoute
+  '/posts/$postId': typeof AuthenticatedPostsPostIdRoute
+  '/products/$productId': typeof AuthenticatedProductsProductIdRoute
+  '/posts': typeof AuthenticatedPostsIndexRoute
+  '/products': typeof AuthenticatedProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
-  '/posts': typeof PostsRouteWithChildren
-  '/products': typeof ProductsRouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/products/$productId': typeof ProductsProductIdRoute
-  '/posts/': typeof PostsIndexRoute
-  '/products/': typeof ProductsIndexRoute
+  '/_authenticated/chat': typeof AuthenticatedChatRoute
+  '/_authenticated/posts': typeof AuthenticatedPostsRouteWithChildren
+  '/_authenticated/products': typeof AuthenticatedProductsRouteWithChildren
+  '/_authenticated/posts/$postId': typeof AuthenticatedPostsPostIdRoute
+  '/_authenticated/products/$productId': typeof AuthenticatedProductsProductIdRoute
+  '/_authenticated/posts/': typeof AuthenticatedPostsIndexRoute
+  '/_authenticated/products/': typeof AuthenticatedProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/chat'
     | '/login'
+    | '/chat'
     | '/posts'
     | '/products'
     | '/posts/$postId'
@@ -112,8 +121,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/chat'
     | '/login'
+    | '/chat'
     | '/posts/$postId'
     | '/products/$productId'
     | '/posts'
@@ -121,40 +130,25 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/chat'
+    | '/_authenticated'
     | '/login'
-    | '/posts'
-    | '/products'
-    | '/posts/$postId'
-    | '/products/$productId'
-    | '/posts/'
-    | '/products/'
+    | '/_authenticated/chat'
+    | '/_authenticated/posts'
+    | '/_authenticated/products'
+    | '/_authenticated/posts/$postId'
+    | '/_authenticated/products/$productId'
+    | '/_authenticated/posts/'
+    | '/_authenticated/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ChatRoute: typeof ChatRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LoginRoute: typeof LoginRoute
-  PostsRoute: typeof PostsRouteWithChildren
-  ProductsRoute: typeof ProductsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/posts': {
-      id: '/posts'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -162,11 +156,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/chat': {
-      id: '/chat'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof ChatRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -176,69 +170,106 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/': {
-      id: '/products/'
+    '/_authenticated/products': {
+      id: '/_authenticated/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof AuthenticatedProductsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/posts': {
+      id: '/_authenticated/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof AuthenticatedPostsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/chat': {
+      id: '/_authenticated/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof AuthenticatedChatRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/products/': {
+      id: '/_authenticated/products/'
       path: '/'
       fullPath: '/products/'
-      preLoaderRoute: typeof ProductsIndexRouteImport
-      parentRoute: typeof ProductsRoute
+      preLoaderRoute: typeof AuthenticatedProductsIndexRouteImport
+      parentRoute: typeof AuthenticatedProductsRoute
     }
-    '/posts/': {
-      id: '/posts/'
+    '/_authenticated/posts/': {
+      id: '/_authenticated/posts/'
       path: '/'
       fullPath: '/posts/'
-      preLoaderRoute: typeof PostsIndexRouteImport
-      parentRoute: typeof PostsRoute
+      preLoaderRoute: typeof AuthenticatedPostsIndexRouteImport
+      parentRoute: typeof AuthenticatedPostsRoute
     }
-    '/products/$productId': {
-      id: '/products/$productId'
+    '/_authenticated/products/$productId': {
+      id: '/_authenticated/products/$productId'
       path: '/$productId'
       fullPath: '/products/$productId'
-      preLoaderRoute: typeof ProductsProductIdRouteImport
-      parentRoute: typeof ProductsRoute
+      preLoaderRoute: typeof AuthenticatedProductsProductIdRouteImport
+      parentRoute: typeof AuthenticatedProductsRoute
     }
-    '/posts/$postId': {
-      id: '/posts/$postId'
+    '/_authenticated/posts/$postId': {
+      id: '/_authenticated/posts/$postId'
       path: '/$postId'
       fullPath: '/posts/$postId'
-      preLoaderRoute: typeof PostsPostIdRouteImport
-      parentRoute: typeof PostsRoute
+      preLoaderRoute: typeof AuthenticatedPostsPostIdRouteImport
+      parentRoute: typeof AuthenticatedPostsRoute
     }
   }
 }
 
-interface PostsRouteChildren {
-  PostsPostIdRoute: typeof PostsPostIdRoute
-  PostsIndexRoute: typeof PostsIndexRoute
+interface AuthenticatedPostsRouteChildren {
+  AuthenticatedPostsPostIdRoute: typeof AuthenticatedPostsPostIdRoute
+  AuthenticatedPostsIndexRoute: typeof AuthenticatedPostsIndexRoute
 }
 
-const PostsRouteChildren: PostsRouteChildren = {
-  PostsPostIdRoute: PostsPostIdRoute,
-  PostsIndexRoute: PostsIndexRoute,
+const AuthenticatedPostsRouteChildren: AuthenticatedPostsRouteChildren = {
+  AuthenticatedPostsPostIdRoute: AuthenticatedPostsPostIdRoute,
+  AuthenticatedPostsIndexRoute: AuthenticatedPostsIndexRoute,
 }
 
-const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
+const AuthenticatedPostsRouteWithChildren =
+  AuthenticatedPostsRoute._addFileChildren(AuthenticatedPostsRouteChildren)
 
-interface ProductsRouteChildren {
-  ProductsProductIdRoute: typeof ProductsProductIdRoute
-  ProductsIndexRoute: typeof ProductsIndexRoute
+interface AuthenticatedProductsRouteChildren {
+  AuthenticatedProductsProductIdRoute: typeof AuthenticatedProductsProductIdRoute
+  AuthenticatedProductsIndexRoute: typeof AuthenticatedProductsIndexRoute
 }
 
-const ProductsRouteChildren: ProductsRouteChildren = {
-  ProductsProductIdRoute: ProductsProductIdRoute,
-  ProductsIndexRoute: ProductsIndexRoute,
+const AuthenticatedProductsRouteChildren: AuthenticatedProductsRouteChildren = {
+  AuthenticatedProductsProductIdRoute: AuthenticatedProductsProductIdRoute,
+  AuthenticatedProductsIndexRoute: AuthenticatedProductsIndexRoute,
 }
 
-const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
-  ProductsRouteChildren,
+const AuthenticatedProductsRouteWithChildren =
+  AuthenticatedProductsRoute._addFileChildren(
+    AuthenticatedProductsRouteChildren,
+  )
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedChatRoute: typeof AuthenticatedChatRoute
+  AuthenticatedPostsRoute: typeof AuthenticatedPostsRouteWithChildren
+  AuthenticatedProductsRoute: typeof AuthenticatedProductsRouteWithChildren
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedChatRoute: AuthenticatedChatRoute,
+  AuthenticatedPostsRoute: AuthenticatedPostsRouteWithChildren,
+  AuthenticatedProductsRoute: AuthenticatedProductsRouteWithChildren,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ChatRoute: ChatRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LoginRoute: LoginRoute,
-  PostsRoute: PostsRouteWithChildren,
-  ProductsRoute: ProductsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

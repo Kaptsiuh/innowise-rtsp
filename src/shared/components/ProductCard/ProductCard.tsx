@@ -1,16 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "../ui/button";
-import { Route } from "@/app/routes/products.$productId";
+import { Route } from "@/app/routes/_authenticated/products.$productId";
 import { cn } from "@/shared/lib/utils";
 import type { Product } from "@/features/products/types/product";
-import {
-  Badge,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../";
+import { Badge, Card, CardContent, CardFooter, CardHeader, CardTitle } from "../";
 
 type Props = {
   product: Product;
@@ -20,8 +13,7 @@ type Props = {
 export const ProductCard = ({ product, variant = "card" }: Props) => {
   const isDetail = variant === "detail";
   const discount = Math.floor(product.discountPercentage) > 0;
-  const discountedPrice =
-    product.price * (1 - product.discountPercentage / 100);
+  const discountedPrice = product.price * (1 - product.discountPercentage / 100);
 
   const renderContent = () => (
     <>
@@ -38,36 +30,21 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
           </Badge>
         )}
         {product.stock <= 5 && product.stock > 0 && (
-          <Badge className="absolute bottom-2 left-2 bg-yellow-500 hover:bg-yellow-600 text-white">
-            Last chance!
-          </Badge>
+          <Badge className="absolute bottom-2 left-2 bg-yellow-500 hover:bg-yellow-600 text-white">Last chance!</Badge>
         )}
         {product.stock === 0 && (
-          <Badge className="absolute bottom-2 left-2 bg-gray-600 hover:bg-gray-700 text-white">
-            Out of stock
-          </Badge>
+          <Badge className="absolute bottom-2 left-2 bg-gray-600 hover:bg-gray-700 text-white">Out of stock</Badge>
         )}
       </div>
       <CardHeader>
-        <div className="pt-2 text-xs text-muted-foreground">
-          {product.brand}
-        </div>
-        <CardTitle
-          className={cn(
-            "font-semibold",
-            isDetail ? "text-2xl" : "text-base line-clamp-2",
-          )}
-        >
+        <div className="pt-2 text-xs text-muted-foreground">{product.brand}</div>
+        <CardTitle className={cn("font-semibold", isDetail ? "text-2xl" : "text-base line-clamp-2")}>
           {product.title}
         </CardTitle>
         <div className="mb-2 flex items-center gap-1 text-sm">
           <span
             className={
-              product.rating >= 4
-                ? "text-green-500"
-                : product.rating >= 3
-                  ? "text-yellow-500"
-                  : "text-red-500"
+              product.rating >= 4 ? "text-green-500" : product.rating >= 3 ? "text-yellow-500" : "text-red-500"
             }
           >
             ★
@@ -77,17 +54,11 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
         <div className="mt-auto">
           {discount ? (
             <div className="flex items-baseline gap-2">
-              <span className="text-xl font-bold text-red-600">
-                ${discountedPrice.toFixed(2)}
-              </span>
-              <span className="text-sm text-muted-foreground line-through">
-                ${product.price.toFixed(2)}
-              </span>
+              <span className="text-xl font-bold text-red-600">${discountedPrice.toFixed(2)}</span>
+              <span className="text-sm text-muted-foreground line-through">${product.price.toFixed(2)}</span>
             </div>
           ) : (
-            <span className="text-xl font-bold text-foreground">
-              ${product.price.toFixed(2)}
-            </span>
+            <span className="text-xl font-bold text-foreground">${product.price.toFixed(2)}</span>
           )}
         </div>
       </CardHeader>
@@ -97,24 +68,20 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
             <p className="text-base">{product.description}</p>
             <div className="grid gap-2 text-sm">
               <div>
-                <span className="font-medium">Category:</span>{" "}
-                {product.category}
+                <span className="font-medium">Category:</span> {product.category}
               </div>
               <div>
                 <span className="font-medium">Stock:</span> {product.stock}
               </div>
               <div>
-                <span className="font-medium">Shipping:</span>{" "}
-                {product.shippingInformation}
+                <span className="font-medium">Shipping:</span> {product.shippingInformation}
               </div>
               <div>
-                <span className="font-medium">Warranty:</span>{" "}
-                {product.warrantyInformation}
+                <span className="font-medium">Warranty:</span> {product.warrantyInformation}
               </div>
               {product.weight && (
                 <div>
-                  <span className="font-medium">Weight:</span> {product.weight}{" "}
-                  kg
+                  <span className="font-medium">Weight:</span> {product.weight} kg
                 </div>
               )}
             </div>
@@ -148,11 +115,7 @@ export const ProductCard = ({ product, variant = "card" }: Props) => {
   ) : (
     <li className="list-none">
       <Card className={wrapper}>
-        <Link
-          to={Route.to}
-          params={{ productId: String(product.id) }}
-          className="block h-full"
-        >
+        <Link to={Route.to} params={{ productId: String(product.id) }} className="block h-full">
           {renderContent()}
         </Link>
         {renderAddToCartButton()}

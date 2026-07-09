@@ -11,10 +11,7 @@ interface ApiClientOptions {
   itemsPerPage?: number;
 }
 
-export const createApiClient = <T>({
-  endpoint,
-  itemsPerPage = 10,
-}: ApiClientOptions) => {
+export const createApiClient = <T>({ endpoint, itemsPerPage = 10 }: ApiClientOptions) => {
   return {
     getItems: async (page: number, signal?: AbortSignal): Promise<T> => {
       try {
@@ -34,16 +31,5 @@ export const createApiClient = <T>({
         throw new Error(`API Error (${endpoint}):`, error);
       }
     },
-
-    // getItem: async (id: string, signal?: AbortSignal): Promise<T> => {
-    //   try {
-    //     const response = await client.GET(`${endpoint}/${id}`, {
-    //       signal,
-    //     });
-    //     return response.data as T;
-    //   } catch (error) {
-    //     throw new Error(`API Error (${endpoint}/${id}):`, error);
-    //   }
-    // },
   };
 };

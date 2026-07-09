@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import { Link } from "@tanstack/react-router";
-import { Route } from "@/app/routes/posts.$postId";
+import { Route } from "@/app/routes/_authenticated/posts.$postId";
 import { cn } from "@/shared/lib/utils";
 import type { Post } from "@/features/posts/types/post";
 import { CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -23,36 +23,21 @@ export const PostCard = ({ post, variant = "card" }: Props) => {
   return (
     <div className={"group relative flex h-full flex-col"}>
       <CardHeader>
-        <CardTitle
-          className={cn(
-            "font-semibold mb-3",
-            isDetail ? "text-3xl" : "line-clamp-2 text-base",
-          )}
-        >
+        <CardTitle className={cn("font-semibold mb-3", isDetail ? "text-3xl" : "line-clamp-2 text-base")}>
           {post.title}
         </CardTitle>
       </CardHeader>
-      <p
-        className={cn(
-          "text-muted-foreground mb-3",
-          isDetail ? "text-base leading-relaxed" : "line-clamp-3 text-sm",
-        )}
-      >
+      <p className={cn("text-muted-foreground mb-3", isDetail ? "text-base leading-relaxed" : "line-clamp-3 text-sm")}>
         {post.body}
       </p>
       <div className="flex flex-wrap gap-1 pb-4 ">
         {post.tags.slice(0, 3).map((tag) => (
-          <Badge
-            key={tag}
-            className="bg-primary/10 text-primary hover:bg-primary/20"
-          >
+          <Badge key={tag} className="bg-primary/10 text-primary hover:bg-primary/20">
             #{tag}
           </Badge>
         ))}
         {post.tags.length > 3 && (
-          <span className="text-xs  text-muted-foreground self-center">
-            +{post.tags.length - 3}
-          </span>
+          <span className="text-xs  text-muted-foreground self-center">+{post.tags.length - 3}</span>
         )}
       </div>
       <CardContent className="flex-1 flex justify-between">

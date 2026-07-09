@@ -1,4 +1,4 @@
-import { Route } from "@/app/routes/posts.$postId";
+import { Route } from "@/app/routes/_authenticated/posts.$postId";
 import { usePost } from "@/features/posts/hooks/usePost";
 import { usePostComments } from "@/features/posts/hooks/usePostComments";
 import { PostComments } from "@/features/posts/ui/PostComments/PostComments";
@@ -7,13 +7,8 @@ import { Link } from "@tanstack/react-router";
 
 export const PostDetailPage = () => {
   const { postId } = Route.useParams();
-  const {
-    data: post,
-    isLoading: postLoading,
-    error: postError,
-  } = usePost(postId);
-  const { data: commentsData, isLoading: commentsLoading } =
-    usePostComments(postId);
+  const { data: post, isLoading: postLoading, error: postError } = usePost(postId);
+  const { data: commentsData, isLoading: commentsLoading } = usePostComments(postId);
 
   if (postLoading || commentsLoading) {
     return (

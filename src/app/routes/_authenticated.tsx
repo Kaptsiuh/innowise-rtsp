@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/posts")({
+export const Route = createFileRoute("/_authenticated")({
   component: () => <Outlet />,
   beforeLoad: () => {
     const token = localStorage.getItem("auth_token");
