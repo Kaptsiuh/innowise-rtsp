@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/products-page-D1h67K_7.js","assets/utils-bYLFDk4y.js","assets/index-DODKIaRn.js","assets/index-C0X9G-EO.css","assets/createApiClient-Cq87CtIx.js","assets/useQuery-C4xwv_Kn.js"])))=>i.map(i=>d[i]);
+import{a as e,y as t}from"./index-DODKIaRn.js";var n=t(()=>e(()=>import(`./products-page-D1h67K_7.js`),__vite__mapDeps([0,1,2,3,4,5])),`ProductsPage`);export{n as component};
