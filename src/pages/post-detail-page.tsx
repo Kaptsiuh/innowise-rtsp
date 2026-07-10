@@ -4,6 +4,7 @@ import { usePostComments } from "@/features/posts/hooks/usePostComments";
 import { PostComments } from "@/features/posts/ui/PostComments/PostComments";
 import { PostCard } from "@/shared/components";
 import { Link } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 
 export const PostDetailPage = () => {
   const { postId } = Route.useParams();
@@ -34,17 +35,26 @@ export const PostDetailPage = () => {
   const comments = commentsData?.comments ?? [];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-3xl">
-      <Link
-        to="/posts"
-        className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
-      >
-        Back to posts
-      </Link>
-      <PostCard post={post} variant={"detail"} />
-      <section className="mt-10">
-        <PostComments comments={comments} />
-      </section>
-    </div>
+    <>
+      <Helmet>
+        <title>{post.title} – Innowise RTSP</title>
+        <meta name="description" content={post.body.slice(0, 160)} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.body.slice(0, 160)} />
+        <meta property="og:image" content={post.title} />
+      </Helmet>
+      <div className="container mx-auto px-4 py-8 max-w-3xl">
+        <Link
+          to="/posts"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
+        >
+          Back to posts
+        </Link>
+        <PostCard post={post} variant={"detail"} />
+        <section className="mt-10">
+          <PostComments comments={comments} />
+        </section>
+      </div>
+    </>
   );
 };

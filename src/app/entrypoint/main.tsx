@@ -6,6 +6,7 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "../routes/routeTree.gen.ts";
 import { AuthProvider } from "@/shared/api/context/auth-context.tsx";
 import { queryClient } from "@/shared/lib/query-client.ts";
+import { HelmetProvider } from "react-helmet-async";
 
 const router = createRouter({ routeTree, basepath: "/innowise-rtsp" });
 
@@ -17,10 +18,12 @@ declare module "@tanstack/react-router" {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </AuthProvider>
+    </HelmetProvider>
   </StrictMode>,
 );
