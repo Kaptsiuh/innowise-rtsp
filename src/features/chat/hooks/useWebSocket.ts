@@ -17,9 +17,7 @@ export const useWebSocket = (url: string) => {
 
     ws.onmessage = (event) => {
       const data = event.data;
-      if (!data.startsWith("You: ")) {
-        setMessages((prev) => [...prev, data]);
-      }
+      setMessages((prev) => [...prev, data]);
     };
 
     ws.onclose = () => {
@@ -28,6 +26,7 @@ export const useWebSocket = (url: string) => {
 
     ws.onerror = (error) => {
       console.error("WebSocket error:", error);
+      setStatus("disconnected");
     };
 
     return () => {
@@ -36,10 +35,11 @@ export const useWebSocket = (url: string) => {
   }, [url]);
 
   const sendMessage = useCallback((message: string) => {
-    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      setMessages((prev) => [...prev, `You: ${message}`]);
+    const ws = wsRef.current;
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(message);
     } else {
-      console.warn("WebSocket is not open");
+      console.warn("WebSocket is not connected");
     }
   }, []);
 
