@@ -11,7 +11,20 @@ export const authApi = {
     const { data, error } = await client.POST("/auth/login", {
       body: credentials,
     });
-    if (error) throw new Error(error || "Login failed");
+    if (error) {
+      let message = "Login failed";
+      if (typeof error === "string") {
+        message = error;
+      } else if (error && typeof error === "object") {
+        const err = error as Record<string, unknown>;
+        if (typeof err.message === "string") {
+          message = err.message;
+        } else if (typeof err.error === "string") {
+          message = err.error;
+        }
+      }
+      throw new Error(message);
+    }
     return data as AuthResponse;
   },
 
@@ -21,7 +34,10 @@ export const authApi = {
         Authorization: `Bearer ${token}`,
       },
     });
-    if (error) throw new Error(error || "Failed to fetch user");
+    if (error)
+      throw new Error(
+        typeof error === "string" ? error : "Failed to fetch user",
+      );
     return data as User;
   },
 
@@ -29,7 +45,8 @@ export const authApi = {
     const { data, error } = await client.POST("/auth/refresh", {
       body: { refreshToken },
     });
-    if (error) throw new Error(error || "Refresh failed");
+    if (error)
+      throw new Error(typeof error === "string" ? error : "Refresh failed");
     return data as Tokens;
   },
 };
