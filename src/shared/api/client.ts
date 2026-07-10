@@ -16,8 +16,10 @@ export const STORAGE_KEYS = {
 export const tokenStorage = {
   getAccess: () => localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
   getRefresh: () => localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN),
-  setAccess: (token: string) => localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, token),
-  setRefresh: (token: string) => localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, token),
+  setAccess: (token: string) =>
+    localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, token),
+  setRefresh: (token: string) =>
+    localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, token),
   clear: () => {
     localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
@@ -106,7 +108,10 @@ async function refreshTokens(): Promise<{
   }
 }
 
-async function retryRequest(request: Request, token: string): Promise<Response> {
+async function retryRequest(
+  request: Request,
+  token: string,
+): Promise<Response> {
   const newRequest = new Request(request.url, {
     method: request.method,
     headers: new Headers(request.headers),

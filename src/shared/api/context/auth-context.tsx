@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  type ReactNode,
+} from "react";
 import type { User } from "@/features/auth/types/auth";
 import { authApi } from "@/features/auth/api/authApi";
 import { STORAGE_KEYS, tokenStorage } from "../client";
@@ -20,7 +27,9 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN));
+  const [token, setToken] = useState<string | null>(() =>
+    localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
+  );
   const [refreshToken, setRefreshToken] = useState<string | null>(() =>
     localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN),
   );
@@ -55,7 +64,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoading(true);
     try {
       const response = await authApi.login({ username, password });
-      const { accessToken, refreshToken: newRefreshToken, ...userData } = response;
+      const {
+        accessToken,
+        refreshToken: newRefreshToken,
+        ...userData
+      } = response;
       tokenStorage.setAccess(accessToken);
       if (newRefreshToken) {
         tokenStorage.setRefresh(newRefreshToken);
@@ -64,8 +77,27 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setToken(accessToken);
       setRefreshToken(newRefreshToken || null);
       setUser(userData);
-    } catch {
-      throw new Error(`Login error`);
+    } catch (error: unknown) {
+      let errorMessage = "Login failed";
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (error && typeof error === "object") {
+        const err = error as Record<string, unknown>;
+
+        const response = err.response as Record<string, unknown> | undefined;
+        const data = response?.data as Record<string, unknown> | undefined;
+
+        if (data?.message && typeof data.message === "string") {
+          errorMessage = data.message;
+        } else if (data?.error && typeof data.error === "string") {
+          errorMessage = data.error;
+        } else if (err.message && typeof err.message === "string") {
+          errorMessage = err.message;
+        }
+      }
+
+      throw new Error(errorMessage, { cause: error });
     } finally {
       setIsLoading(false);
     }
