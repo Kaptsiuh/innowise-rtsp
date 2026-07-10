@@ -7,8 +7,13 @@ import { Link } from "@tanstack/react-router";
 
 export const PostDetailPage = () => {
   const { postId } = Route.useParams();
-  const { data: post, isLoading: postLoading, error: postError } = usePost(postId);
-  const { data: commentsData, isLoading: commentsLoading } = usePostComments(postId);
+  const {
+    data: post,
+    isLoading: postLoading,
+    error: postError,
+  } = usePost(postId);
+  const { data: commentsData, isLoading: commentsLoading } =
+    usePostComments(postId);
 
   if (postLoading || commentsLoading) {
     return (

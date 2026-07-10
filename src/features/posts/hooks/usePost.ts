@@ -1,6 +1,6 @@
 import { client } from "@/shared/api/client";
+import type { Post } from "@/shared/types/post";
 import { useQuery } from "@tanstack/react-query";
-import type { Post } from "../types/post";
 
 export const usePost = (postId: string | number) => {
   const id = Number(postId);

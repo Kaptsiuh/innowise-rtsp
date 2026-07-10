@@ -1,5 +1,5 @@
+import type { Product, ProductsResponse } from "@/shared/types/product";
 import { productsApi } from "../api/productsApi";
-import type { Product, ProductsResponse } from "../types/product";
 import { usePaginatedQuery } from "@/shared/hooks/usePaginatedQuery";
 
 export const useProducts = () => {

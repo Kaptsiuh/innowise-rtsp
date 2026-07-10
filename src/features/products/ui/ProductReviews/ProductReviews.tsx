@@ -1,5 +1,5 @@
 import { Card, CardHeader } from "@/shared/components";
-import type { Review } from "../../types/product";
+import type { Review } from "@/shared/types/product";
 
 export const ProductReviews = ({ reviews }: { reviews?: Review[] }) => {
   if (!reviews || reviews.length === 0) {

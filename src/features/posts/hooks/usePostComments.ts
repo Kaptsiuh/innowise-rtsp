@@ -1,6 +1,6 @@
 import { client } from "@/shared/api/client";
+import type { CommentsResponse } from "@/shared/types/post";
 import { useQuery } from "@tanstack/react-query";
-import type { CommentsResponse } from "../types/post";
 
 export const usePostComments = (postId: string | number) => {
   const id = Number(postId);

@@ -1,6 +1,6 @@
 import { client } from "@/shared/api/client";
+import type { Product } from "@/shared/types/product";
 import { useQuery } from "@tanstack/react-query";
-import type { Product } from "../types/product";
 
 export const useProduct = (productId: string | number) => {
   const id = Number(productId);

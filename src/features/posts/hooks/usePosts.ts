@@ -1,6 +1,6 @@
 import { usePaginatedQuery } from "@/shared/hooks/usePaginatedQuery";
-import type { Post, PostsResponse } from "../types/post";
 import { postsApi } from "../api/postsApi";
+import type { Post, PostsResponse } from "@/shared/types/post";
 
 export const usePosts = () => {
   return usePaginatedQuery<PostsResponse, Post>({
