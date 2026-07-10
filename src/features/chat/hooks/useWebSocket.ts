@@ -38,6 +38,7 @@ export const useWebSocket = (url: string) => {
     const ws = wsRef.current;
     if (ws && ws.readyState === WebSocket.OPEN) {
       ws.send(message);
+      setMessages((prev) => [...prev, `You: ${message}`]);
     } else {
       console.warn("WebSocket is not connected");
     }

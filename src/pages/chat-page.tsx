@@ -71,7 +71,6 @@ export const ChatPage = () => {
               )}
               {messages.map((msg, id) => {
                 const isOwn = msg.startsWith("You: ");
-                const displayText = isOwn ? msg.replace("You: ", "") : msg;
                 return (
                   <div
                     key={id}
@@ -82,7 +81,7 @@ export const ChatPage = () => {
                         : "bg-muted rounded-bl-none",
                     )}
                   >
-                    {displayText}
+                    {isOwn ? msg : `Server: ${msg}`}
                   </div>
                 );
               })}
