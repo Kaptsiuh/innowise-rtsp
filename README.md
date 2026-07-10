@@ -174,3 +174,4 @@ src/
 ## Links
 
 - **API**: [DummyJSON](https://dummyjson.com)
+- **Deployed App**: [https://Kaptsiuh.github.io/innowise-rtsp](https://Kaptsiuh.github.io/innowise-rtsp)
